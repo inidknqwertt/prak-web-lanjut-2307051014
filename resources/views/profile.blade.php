@@ -49,7 +49,7 @@
     <div class="profile-card">
         <div class="profile-img"></div>
         <div class="profile-info">Nama: {{ $nama }}</div>
-        <div class="profile-info">Kelas: {{ $kelas }}</div>
+        <div class="profile-info">Kelas: {{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</div>
         <div class="profile-info">NPM: {{ $npm }}</div>
     </div>
 
