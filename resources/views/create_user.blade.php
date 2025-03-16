@@ -11,7 +11,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #f4f4dc;
             margin: 0;
         }
         .form-container {
@@ -35,18 +35,24 @@
             margin-bottom: 5px;
             text-align: left;
         }
-        input[type="text"] {
+        input[type="text"], select {
             width: 90%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 14px;
             text-align: left;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="text"]:hover, input[type="text"]:focus, select:hover, select:focus {
+            border-color: rgb(46, 238, 88);
+            box-shadow: 0 0 5px rgba(46, 238, 88, 0.5);
+            outline: none;
         }
         .submit-btn {
             width: 90%;
             padding: 12px;
-            background-color:rgb(46, 238, 88);
+            background-color: rgb(46, 238, 88);
             border: none;
             color: white;
             font-size: 16px;
@@ -55,27 +61,36 @@
             transition: background 0.3s;
         }
         .submit-btn:hover {
-            background-color:rgb(9, 179, 0);
+            background-color: rgb(9, 179, 0);
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h2> Menambah User</h2>
+        <h2>Menambah User</h2>
         <form action="{{ route('user.store') }}" method="POST" class="space-y-4">
             @csrf
-            
             <div class="form-group">
                 <label for="nama">Nama:</label>
-                <input type="text" id="nama" name="nama" required>
+                <input type="text" id="nama" name="nama">
+                @foreach($errors->get('nama') as $msg)
+                <p class="text-red-500 text-sm mt-1">{{$msg}}</p>
+                @endforeach
             </div>
             <div class="form-group">
                 <label for="npm">NPM:</label>
-                <input type="text" id="npm" name="npm" required>
+                <input type="text" id="npm" name="npm">
+                @foreach($errors->get('npm') as $msg)
+                <p class="text-red-500 text-sm mt-1">{{$msg}}</p>
+                @endforeach
             </div>
             <div class="form-group">
-                <label for="kelas">Kelas:</label>
-                <input type="text" id="kelas" name="kelas" required>
+                <label for="id_kelas">Kelas:</label>
+                <select name="kelas_id" id="kelas_id">
+                    @foreach($kelas as $kelasItem)
+                    <option value="{{$kelasItem->id}}">{{$kelasItem->nama_kelas}}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="submit-btn">Submit</button>
         </form>
