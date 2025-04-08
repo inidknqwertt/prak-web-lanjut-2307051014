@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Menambah User</title>
+@extends('layouts.app')
+
+@section('content')
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -64,9 +62,8 @@
             background-color: rgb(9, 179, 0);
         }
     </style>
-</head>
-<body>
-    <div class="form-container">
+
+<div class="form-container">
         <h2>Menambah User</h2>
         <form action="{{ route('user.store') }}" method="POST" class="space-y-4">
             @csrf
@@ -95,5 +92,8 @@
             <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
-</body>
-</html>
+
+@endsection
+
+
+

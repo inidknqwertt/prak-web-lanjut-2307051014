@@ -10,13 +10,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function create(){
-        
-        return view('create_user', [
-            'kelas' => Kelas::all(),
-        ]);
-    }
-
+  
     public function store(UserRequest $request)
     {
         $validateData = $request->validate([
@@ -35,5 +29,40 @@ class UserController extends Controller
             'nama_kelas' => $user->kelas->nama_kelas ?? 'Kelas tidak ditemukan',
     ]);
 
+        return redirect()->to('/user');
+
     }
+
+    public function create()
+    {
+        $kelasModel = new Kelas();
+
+        $kelas = $kelasModel->getKelas();
+
+        $data = [
+            'title' => 'Create User',
+            'kelas' => $kelas,
+        ];
+
+        return view('create_user', $data);
+    }
+
+    public $userModel;
+    public $kelasModel;
+
+    public function __construct()
+    {
+    $this->userModel = new UserModel();
+    $this->kelasModel = new Kelas();
+    }
+
+    public function index() 
+{ 
+    $data = [ 
+        'title' => 'Create User', 
+        'users' => $this->userModel->getUser(), 
+    ]; 
+ 
+    return view('list_user', $data); 
+}
 }
