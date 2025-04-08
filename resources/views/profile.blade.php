@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color:rgb(255, 255, 255);
+            background-color: rgb(255, 255, 255);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -15,7 +15,7 @@
             margin: 0;
         }
         .profile-card {
-            background: rgba(255, 255, 255, 0.9); /* Semi transparan */
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -26,19 +26,23 @@
             width: 130px;
             height: 130px;
             border-radius: 50%;
-            background: url('https://i.postimg.cc/pTkzYbp0/Whats-App-Image-2025-02-28-at-16-36-41-0408f4e9.jpg') no-repeat center;
-            background-size: cover;
+            overflow: hidden;
             margin: 0 auto 20px;
             border: 6px solid #99ffcc;
+        }
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .profile-info {
             width: 100%;
             padding: 12px;
             margin: 8px 0;
-            background:rgb(212, 214, 214);
+            background: rgb(212, 214, 214);
             border-radius: 8px;
             font-weight: bold;
-            color:rgb(6, 15, 26);
+            color: rgb(6, 15, 26);
             font-size: 18px;
             text-align: justify;
         }
@@ -47,7 +51,9 @@
 <body>
 
     <div class="profile-card">
-        <div class="profile-img"></div>
+        <div class="profile-img">
+            <img src="{{ asset('assets/img/WhatsApp Image 2025-02-28 at 16.36.41_0408f4e9.jpg') }}" alt="Foto Profil">
+        </div>
         <div class="profile-info">Nama: {{ $nama }}</div>
         <div class="profile-info">Kelas: {{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</div>
         <div class="profile-info">NPM: {{ $npm }}</div>
