@@ -12,7 +12,6 @@
         margin: 0;
     }
 
-    /* Overlay agar lebih nyaman dibaca */
     body::before {
         content: "";
         position: absolute;
@@ -20,14 +19,14 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.3); /* Transparansi */
+        background: rgba(255, 255, 255, 0.3);
         z-index: -1;
     }
 
     .container {
         width: 70%;
         padding: 30px;
-        background: rgba(255, 255, 255, 0.85); /* Lebih transparan */
+        background: rgba(255, 255, 255, 0.85);
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         text-align: center;
@@ -37,7 +36,7 @@
         font-size: 28px;
         font-weight: bold;
         margin-bottom: 20px;
-        color:rgb(62, 92, 152);
+        color: rgb(62, 92, 152);
     }
 
     table {
@@ -49,7 +48,7 @@
     }
 
     thead {
-        background:rgb(115, 135, 157);
+        background: rgb(115, 135, 157);
         color: white;
     }
 
@@ -69,6 +68,8 @@
     }
 </style>
 
+<a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Tambah Pengguna Baru</a>
+
 <div class="container">
     <h2>Daftar Mahasiswa</h2>
     <div class="overflow-x-auto">
@@ -79,17 +80,29 @@
                     <th>Nama</th>
                     <th>NPM</th>
                     <th>Kelas</th>
+                    <th>Foto</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+            @foreach ($users as $user)
                 <tr>
-                    <td>{{ $user['id'] }}</td>
-                    <td>{{ $user['nama'] }}</td>
-                    <td>{{ $user['npm'] }}</td>
-                    <td>{{ $user['nama_kelas'] }}</td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->nama }}</td>
+                    <td>{{ $user->npm }}</td>
+                    <td>{{ $user->nama_kelas }}</td>
+                    <td>
+                        @if ($user->foto)
+                            <img src="{{ asset($user->foto) }}" alt="Foto {{ $user->nama }}" width="50">
+                        @else
+                            <span class="text-muted">Tidak ada foto</span>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning">Detail</a>
+                    </td>
                 </tr>
-                @endforeach
+            @endforeach
             </tbody>
         </table>
     </div>

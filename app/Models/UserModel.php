@@ -17,10 +17,16 @@ class UserModel extends Model
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
-    public function getUser(){
-        return $this->join('kelas', 'kelas.id', '=', 'user.kelas_id')
-                    ->select('user.*', 'kelas.nama_kelas as nama_kelas')
-                    ->get();
+    public function getUser($id = null)
+    {
+        $query = $this->join('kelas', 'kelas.id', '=', 'user.kelas_id')
+                      ->select('user.*', 'kelas.nama_kelas as nama_kelas');
+    
+        if ($id) {
+            return $query->where('user.id', $id)->first(); // ambil satu data
+        }
+    
+        return $query->get(); // ambil semua
     }
-
+    
 }
