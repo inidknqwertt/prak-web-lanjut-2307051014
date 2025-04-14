@@ -52,11 +52,12 @@
 
     <div class="profile-card">
         <div class="profile-img">
-            <img src="{{ asset('assets/img/WhatsApp Image 2025-02-28 at 16.36.41_0408f4e9.jpg') }}" alt="Foto Profil">
+        <img src="{{ asset($user->foto) }}" alt="Foto {{ $user->nama }}" width="50">
         </div>
-        <div class="profile-info">Nama: {{ $nama }}</div>
-        <div class="profile-info">Kelas: {{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</div>
-        <div class="profile-info">NPM: {{ $npm }}</div>
+        <div class="profile-info">Nama: {{ $user->nama }}</div>
+        <div class="profile-info">Kelas: {{ $user->nama_kelas ?? 'Kelas tidak ditemukan' }}</div>
+        <div class="profile-info">NPM: {{ $user->npm }}</div>
+
     </div>
 
 </body>

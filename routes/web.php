@@ -23,8 +23,12 @@ Route::get('/profile', [ProfileController::class, 'profile']);
 
 Route::get('/profile/{nama?}/{kelas?}/{npm?}', [ProfileController::class, 'profile']);
 
-Route::get('/user/create', [UserController::class, 'create'])->name('user_create');
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+
+Route::get('/user/show/{id}', [UserController::class, 'show'])->name('users.show');
+
+Route::get('/user/list', [UserController::class, 'index'])->name('user.list');

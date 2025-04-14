@@ -65,7 +65,8 @@
 
 <div class="form-container">
         <h2>Menambah User</h2>
-        <form action="{{ route('user.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('user.store') }}" method="POST" class="space-y-4" enctype="multipart/form-data">
+       
             @csrf
             <div class="form-group">
                 <label for="nama">Nama:</label>
@@ -89,11 +90,14 @@
                     @endforeach
                 </select>
             </div>
+
+            <div>
+                <input type="file" id="foto" name="foto"><br><br>
+                <label for="foto">Foto:</label> 
+            </div>
+
             <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
 
 @endsection
-
-
-
