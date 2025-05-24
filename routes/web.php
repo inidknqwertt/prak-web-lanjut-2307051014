@@ -32,3 +32,11 @@ Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/show/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
+
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');

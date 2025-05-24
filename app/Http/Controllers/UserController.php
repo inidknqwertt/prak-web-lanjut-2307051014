@@ -50,6 +50,13 @@ class UserController extends Controller
         ];
 
         return view('profile', $data);
+
+        $user = UserModel::findOrFail($id);
+        $kelas = Kelas::find($user->kelas_id);
+
+        $title = 'Detail ' . $user->nama;
+
+        return view('show_user', compact('user', 'kelas', 'title'));
     }
 
     public function create()
@@ -75,8 +82,8 @@ class UserController extends Controller
     $this->kelasModel = new Kelas();
     }
 
-    public function index() 
-{ 
+public function index() 
+    { 
     $data = [ 
         'title' => 'Create User',
         'title' => 'List User', 
@@ -84,5 +91,42 @@ class UserController extends Controller
     ]; 
  
     return view('list_user', $data);
-}
+    }
+    
+public function edit($id)
+    {
+        $user = $this->userModel->getUser($id);
+        $kelasModel = new Kelas();
+        $kelas = $kelasModel->getKelas();
+        $title = 'User Edit';
+        return view('edit_user', compact('user', 'kelas', 'title'));
+    }
+
+public function update(Request $request,$id)
+    {
+        $user = UserModel::findOrFail($id);
+
+        $user->nama = $request->nama;
+        $user->npm = $request->npm;
+        $user->kelas_id = $request->kelas_id;
+
+        if ($request->hasFile('foto')) {
+        $fileName = time() . '.' . $request->foto->extension();
+        $request->foto->move(public_path('uploads'), $fileName);
+        $user->foto = 'uploads/' . $fileName;
+    }
+
+    $user->save();
+
+    return redirect()->route('user.list')->with('success', 'User updated successfully');
+    }
+
+public function destroy($id)
+    {
+        $user = UserModel::findOrFail($id);
+        $user->delete();
+
+    return redirect()->to('/user/list')->with('success', 'User has been deleted successfully');
+    }
+
 } 
