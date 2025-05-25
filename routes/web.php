@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,26 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/profile', [ProfileController::class, 'profile']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/profile/{nama?}/{kelas?}/{npm?}', [ProfileController::class, 'profile']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-
-Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-
-Route::get('/user/show/{id}', [UserController::class, 'show'])->name('users.show');
-
-Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
-
-Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-
-Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-
-Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
-Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
-
-Route::get('/', [UserController::class, 'index'])->name('user.list');
+require __DIR__.'/auth.php';
