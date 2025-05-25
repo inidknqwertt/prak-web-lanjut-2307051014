@@ -99,7 +99,7 @@
                 <input type="file" id="foto" name="foto"><br><br>
                 <label for="foto">Foto:</label>
                @if($user->foto)
-               <img src="{{ asset($user->foto) }}" alt="User Photo" width="100" class="mt-2">
+              <img src="{{ asset('storage/public/uploads/' . $user->foto) }}" alt="Foto User" width="80">
                @endif
             </div>
 
