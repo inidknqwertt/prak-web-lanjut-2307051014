@@ -92,12 +92,12 @@
                     <td>{{ $user->npm }}</td>
                     <td>{{ $user->nama_kelas }}</td>
                     <td>
-                        @if ($user->foto)
-                            <img src="{{ asset($user->foto) }}" alt="Foto {{ $user->nama }}" width="50">
-                        @else
-                            <span class="text-muted">Tidak ada foto</span>
-                        @endif
-                    </td>
+                           @if ($user->foto && file_exists(public_path('storage/public/uploads/' . $user->foto)))
+                            <img src="{{ asset('storage/public/uploads/' . $user->foto) }}" alt="Foto User" width="80">
+                            @else
+                            <img src="{{ asset('assets/img/foto.jpeg') }}" alt="Default User" width="80">
+                            @endif
+                        </td>
                     <td>
                         <a href="{{ route('user.show', $user['id']) }}" class="btn btn-primary">View</a>
                         <a href="{{ route('user.edit', $user ['id']) }}" class="btn btn-warning">Edit</a>

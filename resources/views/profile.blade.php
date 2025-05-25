@@ -52,7 +52,7 @@
 
     <div class="profile-card">
         <div class="profile-img">
-        <img src="{{ asset($user->foto) }}" alt="Foto {{ $user->nama }}" width="50">
+        <img src="{{ asset('storage/public/uploads/' . $user->foto) }}" alt="Foto User" width="80">
         </div>
         <div class="profile-info">Nama: {{ $user->nama }}</div>
         <div class="profile-info">Kelas: {{ $user->nama_kelas ?? 'Kelas tidak ditemukan' }}</div>
